@@ -19,6 +19,7 @@ fun NewsPagination(
     onPageClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Не нужна пагинация, если страница только одна
     if (totalPages <= 1) return
 
     Row(
@@ -26,6 +27,7 @@ fun NewsPagination(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        // Если страниц мало то показываю их все
         if (totalPages <= 7) {
 
             for (page in 1..totalPages) {
@@ -43,6 +45,7 @@ fun NewsPagination(
                             onPageClick(page)
                         })
             }
+            // В начале списка показываю первые 5 страниц и последнюю
         } else if (currentPage <= 4) {
 
             for (page in 1..5) {
@@ -68,6 +71,7 @@ fun NewsPagination(
                     .clickable {
                         onPageClick(totalPages)
                     })
+            // В конце списка показываю только первую страницу и последние 5
         } else if (currentPage >= totalPages - 3) {
             Text(
                 text = "1", modifier = Modifier
@@ -90,6 +94,7 @@ fun NewsPagination(
                             onPageClick(page)
                         })
             }
+            // В середине списка показываю первую, последнюю и соседние с текущей
         } else {
             Text(
                 text = "1", modifier = Modifier

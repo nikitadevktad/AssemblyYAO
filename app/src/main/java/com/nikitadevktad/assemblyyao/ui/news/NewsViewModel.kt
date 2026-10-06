@@ -44,11 +44,13 @@ class NewsViewModel: ViewModel(){
     }
     fun loadNews(){
         viewModelScope.launch {
+            // Состояние загрузки
             _ui = _ui.copy(
                 isLoading = true,
                 error = null,
             )
             try {
+                // Загрузка новостей для текущей страницы
                 val newsPage = repository.getNews(
                     page = _ui.currentPage
                 )
@@ -60,6 +62,7 @@ class NewsViewModel: ViewModel(){
                 )
             }
             catch (e: Exception){
+                // Сохранение ошибки для отображения в UI
                 _ui = _ui.copy(
                     error = e.message
                 )

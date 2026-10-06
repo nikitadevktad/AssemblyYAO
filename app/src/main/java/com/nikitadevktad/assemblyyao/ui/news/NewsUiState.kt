@@ -1,7 +1,7 @@
 package com.nikitadevktad.assemblyyao.ui.news
 
 import com.nikitadevktad.assemblyyao.data.model.News
-
+// Состояние экрана новостей
 data class NewsUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
