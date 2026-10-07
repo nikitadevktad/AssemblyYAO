@@ -1,4 +1,5 @@
 package com.nikitadevktad.assemblyyao.data.model
+
 // Модель новости
 data class News(
     val id: Int,

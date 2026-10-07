@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -30,12 +32,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nikitadevktad.assemblyyao.R
+import com.nikitadevktad.assemblyyao.ui.news.HomeNewsScreen
 
 @Composable
 fun HomeScreen(
     onClickMenu: () -> Unit,
     modifier: Modifier = Modifier,
-    ) {
+) {
 
     var searchQuery by rememberSaveable {
         mutableStateOf("")
@@ -47,7 +50,8 @@ fun HomeScreen(
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
-            modifier = Modifier,
+            modifier = Modifier
+                .verticalScroll(rememberScrollState()),
         ) {
             Row(
                 modifier = Modifier.padding(
@@ -115,10 +119,19 @@ fun HomeScreen(
             Spacer(
                 modifier = Modifier.padding(vertical = 5.dp)
             )
-             HomeBanner(
-                 onClickAbout = {},
-                 modifier = Modifier,
-             )
+            HomeBanner(
+                onClickAbout = {},
+                modifier = Modifier,
+            )
+            HomeNewsScreen(
+                clickNews = {
+
+                },
+                onAllNewsClick = {
+
+                },
+                modifier = Modifier,
+            )
         }
     }
 }

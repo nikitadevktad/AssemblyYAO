@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.nikitadevktad.assemblyyao.data.repository.Repository
 import kotlinx.coroutines.launch
 
-class NewsViewModel: ViewModel(){
+class NewsViewModel : ViewModel() {
     private val repository = Repository()
 
     private var _ui by mutableStateOf(
@@ -17,32 +17,36 @@ class NewsViewModel: ViewModel(){
     val ui: NewsUiState
         get() = _ui
 
-    init{
+    init {
         loadNews()
     }
-    fun newsPage(){
+
+    fun newsPage() {
         _ui = _ui.copy(
-            currentPage = _ui.currentPage +1
+            currentPage = _ui.currentPage + 1
         )
         loadNews()
     }
-    fun backPage(){
-        if(_ui.currentPage > 1){
+
+    fun backPage() {
+        if (_ui.currentPage > 1) {
             _ui = _ui.copy(
                 currentPage = _ui.currentPage - 1
             )
             loadNews()
         }
     }
-    fun goToPage(page: Int){
-        if (page in 1..ui.totalPages){
+
+    fun goToPage(page: Int) {
+        if (page in 1..ui.totalPages) {
             _ui = _ui.copy(
                 currentPage = page
             )
             loadNews()
         }
     }
-    fun loadNews(){
+
+    fun loadNews() {
         viewModelScope.launch {
             // Состояние загрузки
             _ui = _ui.copy(
@@ -60,14 +64,12 @@ class NewsViewModel: ViewModel(){
                     totalPages = newsPage.totalPages,
                     totalNews = newsPage.totalNews
                 )
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 // Сохранение ошибки для отображения в UI
                 _ui = _ui.copy(
                     error = e.message
                 )
-            }
-            finally {
+            } finally {
                 _ui = _ui.copy(
                     isLoading = false,
                 )

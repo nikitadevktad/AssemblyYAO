@@ -11,10 +11,12 @@ object RetrofitClient {
     private val logger = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
+
     // Настройка HTTP клиента
     private val client = OkHttpClient.Builder()
         .addInterceptor(logger)
         .build()
+
     // Настройка ретрофита и создание ApiService
     val api: ApiService = Retrofit.Builder()
         .baseUrl("https://ассамблея76.рф/")

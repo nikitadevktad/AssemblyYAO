@@ -58,7 +58,7 @@ fun NewsCard(
                     ),
                 ) {
                     Text(
-                        text = formateDate(news.date), modifier = Modifier.padding(
+                        text = formatDate(news.date), modifier = Modifier.padding(
                             horizontal = 24.dp, vertical = 12.dp
                         )
                     )
@@ -87,7 +87,7 @@ fun NewsCard(
     }
 }
 
-fun formateDate(
+fun formatDate(
     date: String,
 ): String {
     val parsedDate = LocalDateTime.parse(date)

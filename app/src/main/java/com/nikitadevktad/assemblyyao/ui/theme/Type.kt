@@ -10,8 +10,8 @@ import com.nikitadevktad.assemblyyao.R
 
 val AppFontFamily = FontFamily(
     Font(R.font.tt_norms_regular, FontWeight.Normal),
-            Font(R.font.tt_norms_medium, FontWeight.Medium),
-            Font(R.font.tt_norms_bold, FontWeight.Bold)
+    Font(R.font.tt_norms_medium, FontWeight.Medium),
+    Font(R.font.tt_norms_bold, FontWeight.Bold)
 )
 val Typography = Typography(
     bodyLarge = TextStyle(
