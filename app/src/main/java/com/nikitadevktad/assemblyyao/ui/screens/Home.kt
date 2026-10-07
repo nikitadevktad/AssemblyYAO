@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nikitadevktad.assemblyyao.R
@@ -63,7 +64,7 @@ fun HomeScreen(
             ) {
                 Image(
                     painter = painterResource(R.drawable.logo_anr_cmyk),
-                    contentDescription = "Логотип Ассамблеи",
+                    contentDescription = stringResource(R.string.assembly_logo),
                     contentScale = ContentScale.Fit,
                     modifier = modifier
                         .size(64.dp),
@@ -72,11 +73,11 @@ fun HomeScreen(
                     modifier = Modifier.weight(1f),
                 ) {
                     Text(
-                        text = "Ассамблея ЯО",
+                        text = stringResource(R.string.name_main),
                         style = MaterialTheme.typography.titleLarge,
                     )
                     Text(
-                        text = "Объединяем культуры"
+                        text = stringResource(R.string.bringing_cultures_together)
                     )
                 }
                 IconButton(
@@ -85,7 +86,7 @@ fun HomeScreen(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.main_menu),
-                        contentDescription = "Меню",
+                        contentDescription = stringResource(R.string.menu),
                     )
                 }
             }
@@ -101,7 +102,7 @@ fun HomeScreen(
                 },
                 placeholder = {
                     Text(
-                        text = "Найти новость"
+                        text = stringResource(R.string.find_a_news_item)
                     )
                 },
                 shape = RoundedCornerShape(20.dp),

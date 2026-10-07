@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,7 +85,7 @@ fun HomeBanner(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "Народов много —\nРодина одна",
+                        text = stringResource(R.string.home_banner_title),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         fontSize = 26.sp,
@@ -93,7 +94,7 @@ fun HomeBanner(
                     )
 
                     Text(
-                        text = "Знакомьтесь с культурой нашего региона",
+                        text = stringResource(R.string.home_banner_subtitle),
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.White.copy(alpha = 0.9f)
                     )
@@ -111,7 +112,7 @@ fun HomeBanner(
                         ),
                     ) {
                         Text(
-                            text = "Об Ассамблее",
+                            text = stringResource(R.string.about_the_assembly),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )

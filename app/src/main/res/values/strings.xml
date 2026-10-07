@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">AssemblyYAO</string>
+    <string name="app_name">Ассамблея ЯО</string>
+    <string name="menu">Меню</string>
+    <string name="find_a_news_item">Найти новость</string>
+    <string name="name_main">Ассамблея ЯО</string>
+    <string name="assembly_logo">Логотип Ассамблеи</string>
+    <string name="bringing_cultures_together">Объединяем культуры</string>
+    <string name="about_the_assembly">Об Ассамблее</string>
+    <string name="home_banner_title">Народов много —\nРодина одна</string>
+    <string name="home_banner_subtitle">Знакомьтесь с культурой нашего региона</string>
 </resources>
