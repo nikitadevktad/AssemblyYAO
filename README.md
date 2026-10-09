@@ -54,15 +54,15 @@ Android-приложение для Ассамблеи народов Яросл
 
 ## Этапы разработки
 
-1. [Создание Android-проекта](01-project-creation.md)
-2. [Оформление главной страницы](02-home-design.md)
-3. [Баннер с перелистыванием](03-home-banner.md)
-4. [Получение новостей с сайта](04-news-api.md)
-5. [Состояние загрузки новостей](05-news-state.md)
-6. [Карточки новостей и пагинация](06-news-list.md)
-7. [Разрешение на доступ к интернету](07-internet-permission.md)
-8. [Подключение главной страницы](08-home-integration.md)
-9. [Экран отдельной новости](09-news-details.md)
-10. [Иконка и строковые ресурсы](10-app-resources.md)
-11. [Навигация между разделами](11-navigation.md)
+1. [Создание Android-проекта](docs/steps/01-project-creation.md)
+2. [Оформление главной страницы](docs/steps/02-home-design.md)
+3. [Баннер с перелистыванием](docs/steps/03-home-banner.md)
+4. [Получение новостей с сайта](docs/steps/04-news-api.md)
+5. [Состояние загрузки новостей](docs/steps/05-news-state.md)
+6. [Карточки новостей и пагинация](docs/steps/06-news-list.md)
+7. [Разрешение на доступ к интернету](docs/steps/07-internet-permission.md)
+8. [Подключение главной страницы](docs/steps/08-home-integration.md)
+9. [Экран отдельной новости](docs/steps/09-news-details.md)
+10. [Иконка и строковые ресурсы](docs/steps/10-app-resources.md)
+11. [Навигация между разделами](docs/steps/11-navigation.md)
 
