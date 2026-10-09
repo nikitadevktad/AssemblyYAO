@@ -40,7 +40,6 @@ fun HomeScreen(
     onClickMenu: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
     var searchQuery by rememberSaveable {
         mutableStateOf("")
     }
@@ -75,9 +74,11 @@ fun HomeScreen(
                     Text(
                         text = stringResource(R.string.name_main),
                         style = MaterialTheme.typography.titleLarge,
+                        color = Color(0xFF85051B),
                     )
                     Text(
-                        text = stringResource(R.string.bringing_cultures_together)
+                        text = stringResource(R.string.bringing_cultures_together),
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                 }
                 IconButton(
@@ -87,6 +88,7 @@ fun HomeScreen(
                     Icon(
                         painter = painterResource(R.drawable.main_menu),
                         contentDescription = stringResource(R.string.menu),
+                        tint = Color(0xFF85051B),
                     )
                 }
             }
