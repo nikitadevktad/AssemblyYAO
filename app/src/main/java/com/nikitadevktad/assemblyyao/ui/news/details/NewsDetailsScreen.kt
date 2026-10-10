@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,25 +27,26 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.nikitadevktad.assemblyyao.data.model.News
 import com.nikitadevktad.assemblyyao.ui.news.formatDate
+import com.nikitadevktad.assemblyyao.R
 
 // Загрузка данных для одной новости
 @Composable
 fun NewsDetailsScreen(
-    newsId: Int,
+    newsId: Int?,
 ) {
     val viewModel: NewsDetailsViewModel = viewModel()
     val ui = viewModel.ui
 
     LaunchedEffect(newsId) {
-        viewModel.loadNews(newsId)
+        viewModel.loadNews(newsId!!)
     }
     when {
         ui.isLoading -> {
-            Text("Загрузка")
+            Text(stringResource(R.string.download))
         }
 
         ui.error != null -> {
-            Text(ui.error ?: "Ошибка")
+            Text(ui.error ?: stringResource(R.string.error))
         }
 
         ui.news != null -> {

@@ -10,9 +10,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nikitadevktad.assemblyyao.R
 
 
 @Composable
@@ -32,14 +36,14 @@ fun HomeNewsScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Новости",
+                text = stringResource(R.string.news),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(1f)
             )
 
             Text(
-                text = "Все новости >",
+                text = stringResource(R.string.all_news),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.clickable {
@@ -49,12 +53,12 @@ fun HomeNewsScreen(
         }
         when {
             ui.isLoading -> {
-                Text("Загрузка...")
+                Text(stringResource(R.string.download))
             }
 
             ui.error != null -> {
                 Text(
-                    text = ui.error ?: "Ошибка"
+                    text = ui.error ?: stringResource(R.string.error)
                 )
             }
 
@@ -71,4 +75,13 @@ fun HomeNewsScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewHomeNews(){
+    HomeNewsScreen(
+        clickNews = {},
+        onAllNewsClick = {},
+    )
 }

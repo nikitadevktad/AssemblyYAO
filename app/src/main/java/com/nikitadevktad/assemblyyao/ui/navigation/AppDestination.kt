@@ -13,3 +13,7 @@ enum class TopLevelDestination(
     ABOUT("about", "О нас", R.drawable.info),
     CONTACTS("contacts", "Контакты", R.drawable.contact_support)
 }
+
+object NewsDestination {
+    val route = "news/{newsId}"
+}

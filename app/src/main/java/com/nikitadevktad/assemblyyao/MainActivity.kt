@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.ui.Modifier
+import com.nikitadevktad.assemblyyao.ui.navigation.AppNavigation
 import com.nikitadevktad.assemblyyao.ui.screens.HomeScreen
 import com.nikitadevktad.assemblyyao.ui.theme.AssemblyYAOTheme
 
@@ -13,11 +14,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AssemblyYAOTheme {
-                HomeScreen(
-                    onClickMenu = {},
-                    modifier = Modifier,
-                )
+            AssemblyYAOTheme() {
+                AppNavigation()
             }
         }
     }

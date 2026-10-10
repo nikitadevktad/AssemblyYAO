@@ -8,4 +8,8 @@
     <string name="about_the_assembly">Об Ассамблее</string>
     <string name="home_banner_title">Народов много —\nРодина одна</string>
     <string name="home_banner_subtitle">Знакомьтесь с культурой нашего региона</string>
+    <string name="download">Загрузка...</string>
+    <string name="news">Новости</string>
+    <string name="error">Ошибка</string>
+    <string name="all_news"><![CDATA[Все новости >]]></string>
 </resources>

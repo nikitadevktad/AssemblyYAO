@@ -38,6 +38,7 @@ import com.nikitadevktad.assemblyyao.ui.news.HomeNewsScreen
 @Composable
 fun HomeScreen(
     onClickMenu: () -> Unit,
+    onNewsClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     var searchQuery by rememberSaveable {
@@ -127,9 +128,7 @@ fun HomeScreen(
                 modifier = Modifier,
             )
             HomeNewsScreen(
-                clickNews = {
-
-                },
+                clickNews = onNewsClick,
                 onAllNewsClick = {
 
                 },

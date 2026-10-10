@@ -12,4 +12,4 @@
 
 Добавлен файл `ic_launcher-playstore.png`. Название в `app_name` изменено с `AssemblyYAO` на «Ассамблея ЯО».
 
-[Предыдущий шаг](09-news-details.md)
+[Предыдущий шаг](09-news-details.md) [Следующий шаг](11-navigation.md)

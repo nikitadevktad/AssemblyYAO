@@ -9,9 +9,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nikitadevktad.assemblyyao.R
 
 @Composable
 fun NewsScreen(
@@ -26,18 +28,18 @@ fun NewsScreen(
     ) {
 
         Text(
-            text = "Новости",
+            text = stringResource(R.string.news),
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold
         )
         when {
             ui.isLoading -> {
-                Text("Загрузка...")
+                Text(stringResource(R.string.download))
             }
 
             ui.error != null -> {
                 Text(
-                    text = ui.error ?: "Ошибка"
+                    text = ui.error ?: stringResource(R.string.error)
                 )
             }
 
