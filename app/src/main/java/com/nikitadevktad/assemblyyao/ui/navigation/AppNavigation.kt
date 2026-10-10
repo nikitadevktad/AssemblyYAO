@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.nikitadevktad.assemblyyao.ui.news.NewsScreen
 import com.nikitadevktad.assemblyyao.ui.news.details.NewsDetailsScreen
 import com.nikitadevktad.assemblyyao.ui.screens.HomeScreen
 
@@ -49,7 +50,9 @@ fun AppNavigation(
                     onClickMenu = {},
                     onNewsClick = { newsId ->
                         navController.navigate("news/$newsId")
-
+                    },
+                    onAllNewsClick = {
+                        navController.navigate("news")
                     }
                 )
             }
@@ -67,6 +70,13 @@ fun AppNavigation(
                         newsId = newsId
                     )
                 }
+            }
+            composable(TopLevelDestination.NEWS.route) {
+                NewsScreen(
+                    onNewsClick = { newsId ->
+                        navController.navigate("news/$newsId")
+                    }
+                )
             }
         }
     }

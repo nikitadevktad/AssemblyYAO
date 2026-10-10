@@ -39,6 +39,7 @@ import com.nikitadevktad.assemblyyao.ui.news.HomeNewsScreen
 fun HomeScreen(
     onClickMenu: () -> Unit,
     onNewsClick: (Int) -> Unit = {},
+    onAllNewsClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var searchQuery by rememberSaveable {
@@ -129,9 +130,7 @@ fun HomeScreen(
             )
             HomeNewsScreen(
                 clickNews = onNewsClick,
-                onAllNewsClick = {
-
-                },
+                onAllNewsClick = onAllNewsClick,
                 modifier = Modifier,
             )
         }
@@ -144,5 +143,6 @@ fun HomePreview() {
     HomeScreen(
         onClickMenu = {},
         modifier = Modifier,
+        onAllNewsClick = {},
     )
 }
