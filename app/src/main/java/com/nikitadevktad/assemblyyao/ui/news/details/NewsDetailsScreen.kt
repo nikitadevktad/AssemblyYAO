@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
+import com.nikitadevktad.assemblyyao.R
 import com.nikitadevktad.assemblyyao.data.model.News
 import com.nikitadevktad.assemblyyao.ui.news.formatDate
-import com.nikitadevktad.assemblyyao.R
 
 // Загрузка данных для одной новости
 @Composable

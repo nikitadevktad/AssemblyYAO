@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.nikitadevktad.assemblyyao.ui.news.NewsScreen
 import com.nikitadevktad.assemblyyao.ui.news.details.NewsDetailsScreen
-import com.nikitadevktad.assemblyyao.ui.screens.HomeScreen
+import com.nikitadevktad.assemblyyao.ui.home.HomeScreen
 
 @Composable
 fun AppNavigation(
