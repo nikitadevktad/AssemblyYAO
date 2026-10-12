@@ -65,4 +65,5 @@ Android-приложение для Ассамблеи народов Яросл
 9. [Экран отдельной новости](docs/steps/09-news-details.md)
 10. [Иконка и строковые ресурсы](docs/steps/10-app-resources.md)
 11. [Навигация между разделами](docs/steps/11-navigation.md)
+12. [Экран о нас](docs/steps/13-about-screen.md)
 

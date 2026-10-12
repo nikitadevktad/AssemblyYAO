@@ -27,4 +27,4 @@
 8. `ViewModel` загружает данные через `Repository`.
 9. `NewsDetailsContent` отображает новость.
 
-[Предыдущий шаг](11-navigation.md)
+[Предыдущий шаг](11-navigation.md) [Следующий шаг](13-about-screen.md)

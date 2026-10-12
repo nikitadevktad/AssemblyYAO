@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.nikitadevktad.assemblyyao.ui.about.AboutScreen
 import com.nikitadevktad.assemblyyao.ui.news.NewsScreen
 import com.nikitadevktad.assemblyyao.ui.news.details.NewsDetailsScreen
 import com.nikitadevktad.assemblyyao.ui.home.HomeScreen
@@ -77,6 +78,9 @@ fun AppNavigation(
                         navController.navigate("news/$newsId")
                     }
                 )
+            }
+            composable(TopLevelDestination.ABOUT.route) {
+                AboutScreen()
             }
         }
     }
