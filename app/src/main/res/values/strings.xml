@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Ассамблея ЯО</string>
     <string name="menu">Меню</string>
     <string name="find_a_news_item">Найти новость</string>
@@ -8,10 +8,9 @@
     <string name="about_the_assembly">Об Ассамблее</string>
     <string name="home_banner_title">Народов много —\nРодина одна</string>
     <string name="home_banner_subtitle">Знакомьтесь с культурой нашего региона</string>
-    <string name="download">Загрузка...</string>
+    <string name="download">Загрузка…</string>
     <string name="news">Новости</string>
-    <string name="error">Ошибка</string>
-    <string name="all_news"><![CDATA[Все новости >]]></string>
+    <string name="all_news">Все новости →</string>
     <string name="more_details">Подробнее</string>
     <string name="about_quote_author">Президент Российской Федерации\nВладимир Владимирович Путин</string>
     <string name="about_quote">«Я русский человек, и, как говорится, у меня в роду кругом Иваны да Марьи. Но когда я вижу примеры такого героизма, как подвиг молодого парня Нурмагомеда Гаджимагомедова, уроженца Дагестана, лакца по национальности, других наших воинов, мне хочется сказать: я лакец, я дагестанец, я чеченец, ингуш, русский, татарин, еврей, мордвин, осетин… Всех из более чем трёхсот национальных групп и этнических групп России просто невозможно перечислить (думаю, вы меня понимаете), но я горжусь тем, что я часть этого мира, часть могучего, сильного многонационального народа России…»</string>
@@ -37,4 +36,24 @@
     <string name="talanov_position">Председатель регионального отделения ОГО «Ассамблея народов России» Ярославской области</string>
     <string name="about_yaroslavl">О Ярославле</string>
     <string name="main_text_goals_content">Россия — это многонациональное государство. Поэтому наша задача заключается в том, чтобы способствовать этнокультурному развитию, поддерживать и укреплять единство многонационального народа России. В условиях динамики социальных изменений важно, чтобы любой граждан, независимо от национальности, имел четкую гражданскую позицию, обостренное чувство социальной справедливости, добровольно, осознано и бескорыстно служил своей стране. Уверен, что Ассамблея народов России, являясь одним из институтов гражданского общества, обеспечит условия для полноправного социального и национально-культурного развития всех народов Российской Федерации, упрочнения общероссийской гражданской и духовно-нравственной общности</string>
+    <string name="home">Главная</string>
+    <string name="about_us">О нас</string>
+    <string name="contacts">Контакты</string>
+    <string name="app_navigation_menu">Разделы приложения</string>
+    <string name="offline_data">Нет соединения: показаны сохранённые данные</string>
+    <string name="retry">Повторить</string>
+    <string name="no_news_found">Новости не найдены</string>
+    <string name="contacts_intro">Мы всегда готовы ответить на ваши вопросы. Свяжитесь с нами удобным способом.</string>
+    <string name="phone">Телефон</string>
+    <string name="phone_value" tools:ignore="TypographyDashes">+7 (910) 979-21-66</string>
+    <string name="email">Электронная почта</string>
+    <string name="email_value">assambleyanarodovyar@yandex.ru</string>
+    <string name="address">Адрес</string>
+    <string name="address_value">150003, г. Ярославль, ул. Республиканская, д. 7</string>
+    <string name="website">Официальный сайт</string>
+    <string name="website_value">yaroslavl.ogoanr.ru</string>
+    <string name="call">Позвонить</string>
+    <string name="write">Написать</string>
+    <string name="show_on_map">Открыть карту</string>
+    <string name="open_website">Открыть сайт</string>
 </resources>

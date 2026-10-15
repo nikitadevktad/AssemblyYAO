@@ -4,18 +4,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.nikitadevktad.assemblyyao.data.repository.Repository
+import com.nikitadevktad.assemblyyao.data.repository.NewsRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
-class NewsDetailsViewModel : ViewModel() {
+class NewsDetailsViewModel(
+    private val repository: NewsRepository,
+) : ViewModel() {
     private var _ui by mutableStateOf(
         NewsDetailUiState()
     )
     val ui: NewsDetailUiState
         get() = _ui
-
-    val repository = Repository()
 
     fun loadNews(id: Int) {
         viewModelScope.launch {
@@ -24,21 +26,33 @@ class NewsDetailsViewModel : ViewModel() {
                 error = null,
             )
             try {
-                val news = repository.getNewsId(
-                    id = id
-                )
+                val result = repository.getNews(id)
                 _ui = _ui.copy(
-                    news = news
+                    news = result.data,
+                    isFromCache = result.isFromCache,
                 )
-            } catch (e: Exception) {
+            } catch (exception: CancellationException) {
+                throw exception
+            } catch (exception: Exception) {
                 _ui = _ui.copy(
-                    error = e.message
+                    error = exception.message,
+                    isFromCache = false,
                 )
             } finally {
                 _ui = _ui.copy(
                     isLoading = false,
                 )
             }
+        }
+    }
+
+    class Factory(
+        private val repository: NewsRepository,
+    ) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass.isAssignableFrom(NewsDetailsViewModel::class.java))
+            return NewsDetailsViewModel(repository) as T
         }
     }
 }

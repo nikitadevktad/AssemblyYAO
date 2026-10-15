@@ -19,117 +19,59 @@ fun NewsPagination(
     onPageClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    // Не нужна пагинация, если страница только одна
-    if (totalPages <= 1) return
+    val items = paginationItems(currentPage, totalPages)
+    if (items.isEmpty()) return
 
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Если страниц мало то показываю их все
-        if (totalPages <= 7) {
-
-            for (page in 1..totalPages) {
-
-                Text(
-                    text = page.toString(), fontWeight = if (page == currentPage) {
-                        FontWeight.Bold
-                    } else {
-                        FontWeight.Normal
-                    },
-
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .clickable {
-                            onPageClick(page)
-                        })
+        items.forEach { item ->
+            when (item) {
+                PaginationItem.Ellipsis -> Text(
+                    text = "…",
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                )
+                is PaginationItem.Page -> {
+                    val page = item.number
+                    Text(
+                        text = page.toString(),
+                        fontWeight = if (page == currentPage) FontWeight.Bold else FontWeight.Normal,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .clickable(enabled = page != currentPage) { onPageClick(page) },
+                    )
+                }
             }
-            // В начале списка показываю первые 5 страниц и последнюю
-        } else if (currentPage <= 4) {
-
-            for (page in 1..5) {
-
-                Text(
-                    text = page.toString(), fontWeight = if (page == currentPage) {
-                        FontWeight.Bold
-                    } else {
-                        FontWeight.Normal
-                    }, modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .clickable {
-                            onPageClick(page)
-                        })
-            }
-            Text(
-                text = "...", modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            Text(
-                text = totalPages.toString(),
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .clickable {
-                        onPageClick(totalPages)
-                    })
-            // В конце списка показываю только первую страницу и последние 5
-        } else if (currentPage >= totalPages - 3) {
-            Text(
-                text = "1", modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .clickable {
-                        onPageClick(1)
-                    })
-            Text(
-                text = "...", modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            for (page in (totalPages - 4)..totalPages) {
-                Text(
-                    text = page.toString(), fontWeight = if (page == currentPage) {
-                        FontWeight.Bold
-                    } else {
-                        FontWeight.Normal
-                    }, modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .clickable {
-                            onPageClick(page)
-                        })
-            }
-            // В середине списка показываю первую, последнюю и соседние с текущей
-        } else {
-            Text(
-                text = "1", modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .clickable {
-                        onPageClick(1)
-                    })
-
-            Text(
-                text = "...", modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            for (page in (currentPage - 1)..(currentPage + 1)) {
-
-                Text(
-                    text = page.toString(), fontWeight = if (page == currentPage) {
-                        FontWeight.Bold
-                    } else {
-                        FontWeight.Normal
-                    }, modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .clickable {
-                            onPageClick(page)
-                        })
-            }
-
-            Text(
-                text = "...", modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            Text(
-                text = totalPages.toString(),
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .clickable {
-                        onPageClick(totalPages)
-                    })
         }
     }
+}
+
+sealed interface PaginationItem {
+    data class Page(val number: Int) : PaginationItem
+    data object Ellipsis : PaginationItem
+}
+
+fun paginationItems(currentPage: Int, totalPages: Int): List<PaginationItem> {
+    if (totalPages <= 1) return emptyList()
+    val pages = when {
+        totalPages <= 7 -> (1..totalPages).map { PaginationItem.Page(it) }
+        currentPage <= 4 -> (1..5).map { PaginationItem.Page(it) } +
+            PaginationItem.Ellipsis + PaginationItem.Page(totalPages)
+        currentPage >= totalPages - 3 -> listOf(
+            PaginationItem.Page(1),
+            PaginationItem.Ellipsis,
+        ) + ((totalPages - 4)..totalPages).map { PaginationItem.Page(it) }
+        else -> listOf(
+            PaginationItem.Page(1),
+            PaginationItem.Ellipsis,
+            PaginationItem.Page(currentPage - 1),
+            PaginationItem.Page(currentPage),
+            PaginationItem.Page(currentPage + 1),
+            PaginationItem.Ellipsis,
+            PaginationItem.Page(totalPages),
+        )
+    }
+    return pages
 }

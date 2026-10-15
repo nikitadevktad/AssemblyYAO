@@ -8,23 +8,26 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    // Логирование запросов и ответов
-    private val logger = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
+    fun createApi(enableBodyLogging: Boolean): ApiService {
+        val logger = HttpLoggingInterceptor().apply {
+            level = if (enableBodyLogging) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl("https://ассамблея76.рф/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(ApiService::class.java)
     }
-
-    // Настройка HTTP клиента
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(logger)
-        // Добавил для проверки загрузку до 30 секунд, так как некоторые запуски после 10 секунд выдавали ошибку
-        .readTimeout(30, TimeUnit.SECONDS)
-        .build()
-
-    // Настройка ретрофита и создание ApiService
-    val api: ApiService = Retrofit.Builder()
-        .baseUrl("https://ассамблея76.рф/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
-        .create(ApiService::class.java)
 }

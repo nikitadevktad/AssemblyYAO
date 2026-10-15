@@ -2,7 +2,6 @@ package com.nikitadevktad.assemblyyao.ui.news
 
 import com.nikitadevktad.assemblyyao.data.model.News
 
-// Состояние экрана новостей
 data class NewsUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
@@ -10,4 +9,6 @@ data class NewsUiState(
     val news: List<News> = emptyList(),
     val totalPages: Int = 1,
     val totalNews: Int = 0,
+    val searchQuery: String = "",
+    val isFromCache: Boolean = false,
 )

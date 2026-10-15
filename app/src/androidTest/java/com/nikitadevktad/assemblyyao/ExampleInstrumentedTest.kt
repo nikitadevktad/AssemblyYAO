@@ -1,24 +1,27 @@
 package com.nikitadevktad.assemblyyao
 
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-import org.junit.Assert.*
+class AppNavigationTest {
+    @get:Rule
+    val composeRule = createAndroidComposeRule<MainActivity>()
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.nikitadevktad.assemblyyao", appContext.packageName)
+    fun contactsDestinationOpensFromBottomBar() {
+        composeRule.onNodeWithTag("bottom_contacts").performClick()
+        composeRule.onNodeWithTag("contacts_screen").assertIsDisplayed()
+    }
+
+    @Test
+    fun drawerOpensFromHomeMenuAndNavigatesToAbout() {
+        composeRule.onNodeWithContentDescription("Меню").performClick()
+        composeRule.onNodeWithTag("drawer_about").performClick()
+        composeRule.onNodeWithTag("bottom_about").assertIsDisplayed()
     }
 }

@@ -9,7 +9,7 @@
 ## Что изменилось
 
 - В `ApiService` добавлен запрос `wp-json/wp/v2/posts/{id}`.
-- В Repository добавлен метод `getNewsId(id)`.
+- В Repository добавлена перегрузка `getNews(id)`.
 - В `ui/news/details` созданы `NewsDetailUiState`, `NewsDetailsViewModel` и `NewsDetailsScreen`.
 
 ## Как работает код

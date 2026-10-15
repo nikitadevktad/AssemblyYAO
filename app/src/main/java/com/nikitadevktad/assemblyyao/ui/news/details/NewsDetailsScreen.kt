@@ -27,37 +27,39 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.nikitadevktad.assemblyyao.R
 import com.nikitadevktad.assemblyyao.data.model.News
+import com.nikitadevktad.assemblyyao.data.repository.NewsRepository
+import com.nikitadevktad.assemblyyao.ui.news.NewsError
+import com.nikitadevktad.assemblyyao.ui.news.OfflineDataBanner
 import com.nikitadevktad.assemblyyao.ui.news.formatDate
 
-// Загрузка данных для одной новости
 @Composable
 fun NewsDetailsScreen(
-    newsId: Int?,
+    newsId: Int,
+    repository: NewsRepository,
 ) {
-    val viewModel: NewsDetailsViewModel = viewModel()
+    val viewModel: NewsDetailsViewModel = viewModel(
+        factory = NewsDetailsViewModel.Factory(repository),
+    )
     val ui = viewModel.ui
 
     LaunchedEffect(newsId) {
-        viewModel.loadNews(newsId!!)
+        viewModel.loadNews(newsId)
     }
-    when {
-        ui.isLoading -> {
-            Text(stringResource(R.string.download))
+    Column {
+        if (ui.isFromCache) {
+            OfflineDataBanner()
         }
-
-        ui.error != null -> {
-            Text(ui.error ?: stringResource(R.string.error))
-        }
-
-        ui.news != null -> {
-            NewsDetailsContent(
-                news = ui.news
+        when {
+            ui.isLoading -> Text(stringResource(R.string.download))
+            ui.error != null -> NewsError(
+                message = ui.error,
+                onRetry = { viewModel.loadNews(newsId) },
             )
+            ui.news != null -> NewsDetailsContent(news = ui.news)
         }
     }
 }
 
-// Отрисовка для одной новости
 @Composable
 fun NewsDetailsContent(
     news: News,

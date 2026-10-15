@@ -22,7 +22,9 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.nikitadevktad.assemblyyao.R
 import com.nikitadevktad.assemblyyao.data.model.News
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -92,12 +94,13 @@ fun NewsCard(
 fun formatDate(
     date: String,
 ): String {
-    val parsedDate = LocalDateTime.parse(date)
-
+    val parsedDate = runCatching { OffsetDateTime.parse(date).toLocalDate() }.getOrNull()
+        ?: runCatching { LocalDateTime.parse(date).toLocalDate() }.getOrNull()
+        ?: runCatching { LocalDate.parse(date) }.getOrNull()
+        ?: return date
     val formatter = DateTimeFormatter.ofPattern(
         "d MMMM yyyy",
-        Locale("ru")
+        Locale.forLanguageTag("ru"),
     )
-
     return parsedDate.format(formatter)
 }

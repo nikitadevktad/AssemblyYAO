@@ -6,4 +6,5 @@ data class NewsDetailUiState(
     val news: News? = null,
     val isLoading: Boolean = false,
     val error: String? = null,
+    val isFromCache: Boolean = false,
 )

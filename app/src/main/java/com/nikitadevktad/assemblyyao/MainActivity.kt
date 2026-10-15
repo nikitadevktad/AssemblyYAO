@@ -12,8 +12,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AssemblyYAOTheme() {
-                AppNavigation()
+            AssemblyYAOTheme {
+                AppNavigation(
+                    repository = (application as AssemblyYaoApplication).container.newsRepository,
+                )
             }
         }
     }

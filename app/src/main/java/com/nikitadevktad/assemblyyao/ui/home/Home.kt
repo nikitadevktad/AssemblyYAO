@@ -30,16 +30,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nikitadevktad.assemblyyao.R
+import com.nikitadevktad.assemblyyao.data.repository.NewsRepository
 import com.nikitadevktad.assemblyyao.ui.news.HomeNewsScreen
 
 @Composable
 fun HomeScreen(
+    repository: NewsRepository,
     onClickMenu: () -> Unit,
-    onNewsClick: (Int) -> Unit = {},
+    onNewsClick: (Int) -> Unit,
     onAllNewsClick: () -> Unit,
+    onClickAbout: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var searchQuery by rememberSaveable {
@@ -67,8 +69,7 @@ fun HomeScreen(
                     painter = painterResource(R.drawable.logo_anr_cmyk),
                     contentDescription = stringResource(R.string.assembly_logo),
                     contentScale = ContentScale.Fit,
-                    modifier = modifier
-                        .size(64.dp),
+                    modifier = Modifier.size(64.dp),
                 )
                 Column(
                     modifier = Modifier.weight(1f),
@@ -125,24 +126,14 @@ fun HomeScreen(
                 modifier = Modifier.padding(vertical = 5.dp)
             )
             HomeBanner(
-                onClickAbout = {},
-                modifier = Modifier,
+                onClickAbout = onClickAbout,
             )
             HomeNewsScreen(
+                repository = repository,
+                searchQuery = searchQuery,
                 clickNews = onNewsClick,
                 onAllNewsClick = onAllNewsClick,
-                modifier = Modifier,
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun HomePreview() {
-    HomeScreen(
-        onClickMenu = {},
-        modifier = Modifier,
-        onAllNewsClick = {},
-    )
 }
