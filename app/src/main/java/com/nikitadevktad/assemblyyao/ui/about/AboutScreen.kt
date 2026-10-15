@@ -1,15 +1,18 @@
 package com.nikitadevktad.assemblyyao.ui.about
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,32 +44,44 @@ fun AboutScreen(
             titleRes = R.string.cooperation,
         ),
     )
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-    ) {
-        Text(
-            text = stringResource(R.string.about_the_assembly),
-            style = MaterialTheme.typography.titleLarge,
-            color = Color(0xFF85051B),
-        )
-        aboutSections.forEach { sectionItem ->
-            AboutSection(
-                painter = sectionItem.iconRes,
-                text = sectionItem.titleRes,
-            ) {
-                when (sectionItem.titleRes) {
-                    R.string.goals_objectives -> GoalsContent()
-                    R.string.structure -> StructureContent()
-                    R.string.documents -> DocumentsContent()
-                    R.string.about_yaroslavl -> AboutYaroslavl()
-                    R.string.cooperation -> CooperationContent()
+    BoxWithConstraints(modifier = modifier.fillMaxSize()) {
+        val horizontalPadding = if (maxWidth >= 600.dp) 32.dp else 16.dp
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .fillMaxSize()
+                .widthIn(max = 900.dp)
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    start = horizontalPadding,
+                    end = horizontalPadding,
+                    top = 20.dp,
+                    bottom = 32.dp,
+                ),
+        ) {
+            Text(
+                text = stringResource(R.string.about_the_assembly),
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            aboutSections.forEach { sectionItem ->
+                AboutSection(
+                    painter = sectionItem.iconRes,
+                    text = sectionItem.titleRes,
+                ) {
+                    when (sectionItem.titleRes) {
+                        R.string.goals_objectives -> GoalsContent()
+                        R.string.structure -> StructureContent()
+                        R.string.documents -> DocumentsContent()
+                        R.string.about_yaroslavl -> AboutYaroslavl()
+                        R.string.cooperation -> CooperationContent()
+                    }
                 }
             }
+            AboutQuote()
         }
-        AboutQuote()
     }
 }
 

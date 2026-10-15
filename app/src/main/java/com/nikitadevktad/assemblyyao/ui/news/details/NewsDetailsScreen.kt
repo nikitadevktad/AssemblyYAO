@@ -1,11 +1,13 @@
 package com.nikitadevktad.assemblyyao.ui.news.details
 
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -16,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -65,76 +68,84 @@ fun NewsDetailsContent(
     news: News,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        AsyncImage(
-            model = news.imageUrl,
-            contentDescription = news.title,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(260.dp),
-            contentScale = ContentScale.Crop,
-        )
+    BoxWithConstraints(modifier = modifier.fillMaxSize()) {
+        val imageHeight = (maxWidth * 0.56f).coerceIn(200.dp, 420.dp)
+        val horizontalPadding = if (maxWidth >= 600.dp) 32.dp else 20.dp
 
         Column(
-            modifier = Modifier.padding(
-                horizontal = 24.dp,
-                vertical = 24.dp
-            )
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
+            AsyncImage(
+                model = news.imageUrl,
+                contentDescription = news.title,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(imageHeight),
+                contentScale = ContentScale.Crop,
+            )
 
-            Surface(
-                shape = RoundedCornerShape(50),
-                color = MaterialTheme.colorScheme.secondaryContainer
-            ) {
-                Text(
-                    text = formatDate(news.date),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer,
-                    modifier = Modifier.padding(
-                        horizontal = 16.dp,
-                        vertical = 8.dp
+            Column(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .widthIn(max = 840.dp)
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = horizontalPadding,
+                        vertical = 24.dp,
                     )
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(50),
+                    color = MaterialTheme.colorScheme.secondaryContainer
+                ) {
+                    Text(
+                        text = formatDate(news.date),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier.padding(
+                            horizontal = 16.dp,
+                            vertical = 8.dp
+                        )
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
+
+                Text(
+                    text = news.title,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Spacer(
+                    modifier = Modifier.height(24.dp)
+                )
+
+                HorizontalDivider()
+
+                Spacer(
+                    modifier = Modifier.height(24.dp)
+                )
+
+                Text(
+                    text = HtmlCompat.fromHtml(
+                        news.content,
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    ).toString(),
+                    style = MaterialTheme.typography.bodyLarge,
+                    lineHeight = 26.sp,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Spacer(
+                    modifier = Modifier.height(40.dp)
                 )
             }
-
-            Spacer(
-                modifier = Modifier.height(16.dp)
-            )
-
-            Text(
-                text = news.title,
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Spacer(
-                modifier = Modifier.height(24.dp)
-            )
-
-            HorizontalDivider()
-
-            Spacer(
-                modifier = Modifier.height(24.dp)
-            )
-
-            Text(
-                text = HtmlCompat.fromHtml(
-                    news.content,
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                ).toString(),
-                style = MaterialTheme.typography.bodyLarge,
-                lineHeight = 26.sp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Spacer(
-                modifier = Modifier.height(40.dp)
-            )
         }
     }
 }

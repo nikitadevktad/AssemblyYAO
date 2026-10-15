@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -44,115 +45,117 @@ fun HomeBanner(
     val pagerState = rememberPagerState(
         pageCount = { bannerImages.size }
     )
-    Column(
-        modifier = modifier.fillMaxWidth()
-    ) {
-        Card(
-            shape = RoundedCornerShape(24.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Box {
-                HorizontalPager(
-                    state = pagerState,
-                    modifier = Modifier.fillMaxWidth()
-                ) { page ->
-                    Image(
-                        painter = painterResource(bannerImages[page]),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
+    BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
+        val bannerHeight = (maxWidth * 0.62f).coerceIn(280.dp, 360.dp)
+
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Card(
+                shape = RoundedCornerShape(24.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Box {
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier.fillMaxWidth()
+                    ) { page ->
+                        Image(
+                            painter = painterResource(bannerImages[page]),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(bannerHeight)
+                        )
+                    }
+                    Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(280.dp)
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .matchParentSize()
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.Transparent,
-                                    Color.Black.copy(alpha = 0.8f)
+                            .matchParentSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        Color.Black.copy(alpha = 0.8f)
+                                    )
                                 )
                             )
-                        )
-                )
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .fillMaxWidth()
-                        .padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.home_banner_title),
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 26.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White
                     )
-
-                    Text(
-                        text = stringResource(R.string.home_banner_subtitle),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color.White.copy(alpha = 0.9f)
-                    )
-
-                    Button(
-                        onClick = onClickAbout,
-                        shape = RoundedCornerShape(50),
-                        contentPadding = PaddingValues(
-                            horizontal = 20.dp,
-                            vertical = 12.dp
-                        ),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFB3261E),
-                            contentColor = Color.White,
-                        ),
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .fillMaxWidth()
+                            .padding(20.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.about_the_assembly),
+                            text = stringResource(R.string.home_banner_title),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 26.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White
+                        )
+
+                        Text(
+                            text = stringResource(R.string.home_banner_subtitle),
                             style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Medium
+                            color = Color.White.copy(alpha = 0.9f)
                         )
 
-                        Spacer(Modifier.width(8.dp))
-
-                        Icon(
-                            painter = painterResource(
-                                R.drawable.arrow_forward_icon
+                        Button(
+                            onClick = onClickAbout,
+                            shape = RoundedCornerShape(50),
+                            contentPadding = PaddingValues(
+                                horizontal = 20.dp,
+                                vertical = 12.dp
                             ),
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFFB3261E),
+                                contentColor = Color.White,
+                            ),
+                        ) {
+                            Text(
+                                text = stringResource(R.string.about_the_assembly),
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Medium
+                            )
+
+                            Spacer(Modifier.width(8.dp))
+
+                            Icon(
+                                painter = painterResource(
+                                    R.drawable.arrow_forward_icon
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
                     }
                 }
             }
-        }
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(
-                space = 8.dp,
-                alignment = Alignment.CenterHorizontally
-            )
-        ) {
-            repeat(bannerImages.size) { index ->
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(
-                            color = if (pagerState.currentPage == index) {
-                                Color(0xFFB3261E)
-                            } else {
-                                MaterialTheme.colorScheme.outlineVariant
-                            },
-                            shape = CircleShape
-                        )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(
+                    space = 8.dp,
+                    alignment = Alignment.CenterHorizontally
                 )
+            ) {
+                repeat(bannerImages.size) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (pagerState.currentPage == index) {
+                                    Color(0xFFB3261E)
+                                } else {
+                                    MaterialTheme.colorScheme.outlineVariant
+                                },
+                                shape = CircleShape
+                            )
+                    )
+                }
             }
         }
     }

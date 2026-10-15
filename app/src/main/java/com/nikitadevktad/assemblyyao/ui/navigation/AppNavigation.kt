@@ -1,6 +1,11 @@
 package com.nikitadevktad.assemblyyao.ui.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
@@ -12,6 +17,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -85,53 +91,77 @@ fun AppNavigation(
             }
         },
     ) {
-        Scaffold(
-            bottomBar = {
-                selectedDestination?.let { destination ->
-                    AppBottomBar(
-                        selectedDestination = destination,
+        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+            val useNavigationRail = maxWidth >= 840.dp
+
+            Row(modifier = Modifier.fillMaxSize()) {
+                if (useNavigationRail) {
+                    AppNavigationRail(
+                        selectedDestination = selectedDestination,
                         onClickIcon = navigateTopLevel,
                     )
                 }
-            },
-        ) { padding ->
-            NavHost(
-                navController = navController,
-                startDestination = TopLevelDestination.HOME.route,
-                modifier = Modifier.padding(padding),
-            ) {
-                composable(TopLevelDestination.HOME.route) {
-                    HomeScreen(
-                        repository = repository,
-                        onClickMenu = { scope.launch { drawerState.open() } },
-                        onNewsClick = { newsId ->
-                            navController.navigate(NewsDestination.createRoute(newsId))
-                        },
-                        onAllNewsClick = { navigateTopLevel(TopLevelDestination.NEWS) },
-                        onClickAbout = { navigateTopLevel(TopLevelDestination.ABOUT) },
-                    )
-                }
-                composable(
-                    route = NewsDestination.route,
-                    arguments = listOf(navArgument("newsId") { type = NavType.IntType }),
-                ) { entry ->
-                    entry.arguments?.getInt("newsId")?.let { newsId ->
-                        NewsDetailsScreen(newsId = newsId, repository = repository)
+                Scaffold(
+                    modifier = Modifier.weight(1f),
+                    bottomBar = {
+                        if (!useNavigationRail) {
+                            selectedDestination?.let { destination ->
+                                AppBottomBar(
+                                    selectedDestination = destination,
+                                    onClickIcon = navigateTopLevel,
+                                )
+                            }
+                        }
+                    },
+                ) { padding ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(padding),
+                        contentAlignment = Alignment.TopCenter,
+                    ) {
+                        NavHost(
+                            navController = navController,
+                            startDestination = TopLevelDestination.HOME.route,
+                            modifier = Modifier
+                                .widthIn(max = 1200.dp)
+                                .fillMaxSize(),
+                        ) {
+                            composable(TopLevelDestination.HOME.route) {
+                                HomeScreen(
+                                    repository = repository,
+                                    onClickMenu = { scope.launch { drawerState.open() } },
+                                    onNewsClick = { newsId ->
+                                        navController.navigate(NewsDestination.createRoute(newsId))
+                                    },
+                                    onAllNewsClick = { navigateTopLevel(TopLevelDestination.NEWS) },
+                                    onClickAbout = { navigateTopLevel(TopLevelDestination.ABOUT) },
+                                )
+                            }
+                            composable(
+                                route = NewsDestination.route,
+                                arguments = listOf(navArgument("newsId") { type = NavType.IntType }),
+                            ) { entry ->
+                                entry.arguments?.getInt("newsId")?.let { newsId ->
+                                    NewsDetailsScreen(newsId = newsId, repository = repository)
+                                }
+                            }
+                            composable(TopLevelDestination.NEWS.route) {
+                                NewsScreen(
+                                    repository = repository,
+                                    onNewsClick = { newsId ->
+                                        navController.navigate(NewsDestination.createRoute(newsId))
+                                    },
+                                )
+                            }
+                            composable(TopLevelDestination.ABOUT.route) {
+                                AboutScreen()
+                            }
+                            composable(TopLevelDestination.CONTACTS.route) {
+                                ContactsScreen()
+                            }
+                        }
                     }
-                }
-                composable(TopLevelDestination.NEWS.route) {
-                    NewsScreen(
-                        repository = repository,
-                        onNewsClick = { newsId ->
-                            navController.navigate(NewsDestination.createRoute(newsId))
-                        },
-                    )
-                }
-                composable(TopLevelDestination.ABOUT.route) {
-                    AboutScreen()
-                }
-                composable(TopLevelDestination.CONTACTS.route) {
-                    ContactsScreen()
                 }
             }
         }
