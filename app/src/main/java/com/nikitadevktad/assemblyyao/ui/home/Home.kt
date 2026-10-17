@@ -33,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nikitadevktad.assemblyyao.R
 import com.nikitadevktad.assemblyyao.data.repository.NewsRepository
+import com.nikitadevktad.assemblyyao.ui.memos.HomeMemosSection
 import com.nikitadevktad.assemblyyao.ui.news.HomeNewsScreen
 
 @Composable
@@ -134,6 +135,7 @@ fun HomeScreen(
                 clickNews = onNewsClick,
                 onAllNewsClick = onAllNewsClick,
             )
+            HomeMemosSection()
         }
     }
 }

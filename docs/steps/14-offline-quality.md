@@ -26,4 +26,4 @@ Repository сначала обращается к API. При ошибке он 
 
 R8 может удалять поля, доступные только через reflection. Поэтому каждое поле DTO имеет `@SerializedName`. Проверка release включает анализ `usage.txt` и `mapping.txt`.
 
-[Предыдущий шаг](13-about-screen.md)
+[Предыдущий шаг](13-about-screen.md) · [Следующий шаг](15-foreign-citizen-memos.md)

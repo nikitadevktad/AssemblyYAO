@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nikitadevktad.assemblyyao.R
+import com.nikitadevktad.assemblyyao.ui.memos.ForeignCitizenMemosContent
 
 @Composable
 fun AboutScreen(
@@ -34,6 +35,10 @@ fun AboutScreen(
         AboutSectionItem(
             iconRes = R.drawable.document_search,
             titleRes = R.string.documents,
+        ),
+        AboutSectionItem(
+            iconRes = R.drawable.document_search,
+            titleRes = R.string.memos,
         ),
         AboutSectionItem(
             iconRes = R.drawable.nest_cam,
@@ -75,6 +80,7 @@ fun AboutScreen(
                         R.string.goals_objectives -> GoalsContent()
                         R.string.structure -> StructureContent()
                         R.string.documents -> DocumentsContent()
+                        R.string.memos -> ForeignCitizenMemosContent()
                         R.string.about_yaroslavl -> AboutYaroslavl()
                         R.string.cooperation -> CooperationContent()
                     }
