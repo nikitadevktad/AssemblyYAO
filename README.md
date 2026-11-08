@@ -3,14 +3,15 @@
 
 Android-приложение Ассамблеи народов Ярославской области. Оно объединяет новости, сведения об организации и контакты.
 
-<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/c378f402-6753-4094-81a4-9f43c579b72e" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c378f402-6753-4094-81a4-9f43c579b72e" width="250" />
+  <img src="https://github.com/user-attachments/assets/beea94d5-7967-4074-a78c-a21d5b9eaa98" width="250" />
+</p>
 
-<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/beea94d5-7967-4074-a78c-a21d5b9eaa98" />
-
-<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/9bec1831-2b49-49ab-80cb-bd55da2b7a7e" />
-
-<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/9db8d74f-288c-4d6b-874f-792001298ce2" />
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9bec1831-2b49-49ab-80cb-bd55da2b7a7e" width="250" />
+  <img src="https://github.com/user-attachments/assets/9db8d74f-288c-4d6b-874f-792001298ce2" width="250" />
+</p>
 ## Возможности
 
 - Просмотр последних новостей и полного текста публикаций.
